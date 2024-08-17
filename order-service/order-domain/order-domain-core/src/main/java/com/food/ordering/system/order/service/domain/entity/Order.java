@@ -5,6 +5,8 @@ import com.food.ordering.system.order.service.domain.valueobject.OrderItemId;
 import com.food.ordering.system.order.service.domain.valueobject.StreetAddress;
 import com.food.ordering.system.order.service.domain.valueobject.TrackingId;
 import com.food.ordering.system.valueobject.*;
+
+import javax.swing.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,6 +33,44 @@ public class Order extends Aggregate<OrderId> {
         validateTotalPrice();
         validateItemsPrice();
     }
+    public void pay(){
+        if(orderStatus != OrderStatus.PENDING){
+            throw new OrderDomainException("Order status is in Incorrect state for Pay Operation.");
+        }
+        orderStatus = OrderStatus.PAID;
+    }
+    public void approve(){
+        if(orderStatus != OrderStatus.PAID){
+            throw new OrderDomainException("Order status is in Incorrect state for Approve Operation.");
+        }
+        orderStatus = OrderStatus.APPROVED;
+    }
+    public void initCancel(List<String> failureMessages){
+        if(orderStatus != OrderStatus.PAID){
+            throw new OrderDomainException("Order status is in Incorrect state for InitCancel Operation.");
+        }
+        orderStatus = OrderStatus.CANCELLED;
+        updateFailureMessages(failureMessages);
+    }
+
+    public void cancel(){
+        if(!(orderStatus == OrderStatus.CANCELLED || orderStatus == OrderStatus.PENDING)){
+            throw new OrderDomainException("Order status is in Incorrect state for Cancel Operation.");
+        }
+        orderStatus = OrderStatus.CANCELLED;
+        updateFailureMessages(failureMessages);
+    }
+
+
+    private void updateFailureMessages(List<String> failureMessages) {
+        if( this.failureMessages !=null&&failureMessages != null){
+            this.failureMessages.addAll(failureMessages.stream().filter(String::isEmpty).toList());
+        }
+        if(this.failureMessages == null){
+            this.failureMessages = failureMessages;
+        }
+    }
+
 
     private void validateItemsPrice() {
        Money orderItemTotal= orderItems.stream()
