@@ -5,8 +5,6 @@ import com.food.ordering.system.order.service.domain.valueobject.OrderItemId;
 import com.food.ordering.system.order.service.domain.valueobject.StreetAddress;
 import com.food.ordering.system.order.service.domain.valueobject.TrackingId;
 import com.food.ordering.system.valueobject.*;
-
-import javax.swing.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +19,9 @@ public class Order extends Aggregate<OrderId> {
     private OrderStatus orderStatus;
     private List<String> failureMessages;
 
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public void initializeOrder(){
         setId(new OrderId(UUID.randomUUID()));
