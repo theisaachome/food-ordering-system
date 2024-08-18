@@ -1,9 +1,8 @@
 package com.food.ordering.system.order.service.domain.entity;
 
-import com.food.ordering.system.entity.BaseEntity;
 import com.food.ordering.system.order.service.domain.valueobject.OrderItemId;
-import com.food.ordering.system.valueobject.Money;
-import com.food.ordering.system.valueobject.OrderId;
+import com.food.ordering.system.order.service.domain.valueobject.Money;
+import com.food.ordering.system.order.service.domain.valueobject.OrderId;
 
 public class OrderItem extends BaseEntity<OrderItemId> {
     private OrderId orderId;
