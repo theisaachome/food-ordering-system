@@ -42,6 +42,7 @@ public class Money {
     public int hashCode() {
         return Objects.hashCode(amount);
     }
+
     private BigDecimal setScale(BigDecimal input){
         return input.setScale(2, RoundingMode.HALF_EVEN);
     }

@@ -77,10 +77,10 @@ public class Order extends Aggregate<OrderId> {
        Money orderItemTotal= orderItems.stream()
                 .map((orderItem) -> {
                     validateItemPrice(orderItem);
-                    return orderItem.getPrice();
+                    return orderItem.getSubTotal();
                 })
                 .reduce(Money.ZERO,Money::add);
-
+        System.out.println(orderItemTotal);
        if(!price.equals(orderItemTotal)){
            throw new OrderDomainException("Total Price : " + price.getAmount()
            + " is not equal to Order items total : " + orderItemTotal.getAmount() + "!");
