@@ -18,13 +18,14 @@ import java.util.Map;
 @Configuration
 public class KafkaProducerConfig<K extends Serializable,V extends SpecificRecordBase> {
     private final KafkaConfigData kafkaConfigData;
-    private final KafkaConsumerConfigData kafkaConsumerConfigData;
+    private final KafkaProducerConfigData kafkaProducerConfigData;
 
     public KafkaProducerConfig(KafkaConfigData kafkaConfigData,
-                               KafkaConsumerConfigData kafkaConsumerConfigData) {
+                               KafkaProducerConfigData kafkaProducerConfigData) {
         this.kafkaConfigData = kafkaConfigData;
-        this.kafkaConsumerConfigData = kafkaConsumerConfigData;
+        this.kafkaProducerConfigData = kafkaProducerConfigData;
     }
+
     @Bean
     public Map<String, Object> producerConfig(KafkaProducerConfigData kafkaProducerConfigData) {
         Map<String, Object> props = new HashMap<>();
