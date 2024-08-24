@@ -8,9 +8,12 @@
     </parent>
 
     <artifactId>common</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>common</name>
+    <modules>
+        <module>common-application</module>
+    </modules>
 
     <dependencies>
 
