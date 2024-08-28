@@ -4,4 +4,8 @@ import com.food.ordering.system.entity.Aggregate;
 import com.food.ordering.system.valueobject.CustomerId;
 
 public class Customer extends Aggregate<CustomerId> {
+    public Customer(){}
+    public Customer(CustomerId customerId) {
+        super.setId(customerId);
+    }
 }
