@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface KafkaConsumer <K extends SpecificRecordBase>{
 
-    void receive(List<K> messages,List<Long> keys,List<Integer> partitions,List<Integer> offsets);
+    void receive(List<K> messages,List<String> keys,List<Integer> partitions,List<Integer> offsets);
 }
